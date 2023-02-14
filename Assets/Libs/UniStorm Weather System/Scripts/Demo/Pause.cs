@@ -6,26 +6,26 @@ namespace UniStorm.CharacterController
 {
     public class Pause : MonoBehaviour
     {
-        bool Paused = false;
+        bool FreeLookwCursor = true;
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Paused = !Paused;
+                FreeLookwCursor = !FreeLookwCursor;
             }
 
-            if (Paused)
+            if (FreeLookwCursor)
             {
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
-                GetComponent<UniStormMouseLook>().enabled = false;
+                GetComponent<UniStormMouseLook>().enabled = true;
             }
             else
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                GetComponent<UniStormMouseLook>().enabled = true;
+              //  Cursor.lockState = CursorLockMode.Locked;
+               // Cursor.visible = false;
+               // GetComponent<UniStormMouseLook>().enabled = true;
             }
         }
     }

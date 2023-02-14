@@ -272,6 +272,7 @@ namespace UniStorm
         Transform m_CelestialAxisTransform;
         public int SunRevolution = -90;
         public float SunIntensity = 1;
+        public float SunSizeFloat = 5;
         public float SunAttenuationMultipler = 1;
         public float PrecipitationSunIntensity = 0.25f;
         public AnimationCurve SunIntensityCurve = AnimationCurve.Linear(0, 0, 24, 5);
@@ -415,6 +416,7 @@ namespace UniStorm
         public VRState VRStateData;
         float m_DetailStrength = 0.072f;
 
+        [System.Obsolete]
         void Awake()
         {
             GameObject m_UniStormManager = new GameObject();
@@ -1470,6 +1472,7 @@ namespace UniStorm
             SunObjectMaterial = SunObject.GetComponent<Renderer>().material;
             m_SunRenderer = GameObject.Find("UniStorm Sun Object").GetComponent<Renderer>();
             m_SunTransform = m_SunRenderer.transform;
+
             m_SunTransform.parent = m_SunLight.transform;
 
             if (PlayerCamera.farClipPlane < 2000)
@@ -2560,6 +2563,7 @@ namespace UniStorm
             SunObjectMaterial.SetVector("_uWorldSpaceCameraPos", PlayerCamera.transform.position);
             SunObjectMaterial.SetColor("_SunColor", SunSpotColor.Evaluate(m_TimeFloat));
             SunObject.transform.localScale = Vector3.one * SunSize.Evaluate(m_TimeFloat * 24) * 3;
+
             m_SunLight.intensity = SunIntensityCurve.Evaluate(m_TimeFloat * 24) * SunIntensity;
             m_MoonLight.intensity = MoonIntensityCurve.Evaluate(m_TimeFloat * 24) * MoonIntensity * MoonPhaseIntensity;
             m_MoonTransform.localScale = MoonSize.Evaluate(m_TimeFloat * 24) * m_MoonStartingSize;
